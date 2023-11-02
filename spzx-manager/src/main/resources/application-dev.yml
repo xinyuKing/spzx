@@ -19,3 +19,10 @@ spring:
 mybatis:
   mapper-locations: classpath:/mapper/*/*.xml
   config-location: classpath:/mybatis-config.xml
+
+# 自定义配置
+spzx:
+  auth:
+    noAuthUrls:
+      - /admin/system/index/login
+      - /admin/system/index/generateValidateCode

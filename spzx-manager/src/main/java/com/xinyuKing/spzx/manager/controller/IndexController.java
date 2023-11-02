@@ -8,6 +8,7 @@ import com.xinyuKing.spzx.model.vo.common.Result;
 import com.xinyuKing.spzx.model.vo.common.ResultCodeEnum;
 import com.xinyuKing.spzx.model.vo.system.LoginVo;
 import com.xinyuKing.spzx.model.vo.system.ValidateCodeVo;
+import com.xinyuKing.spzx.utils.AuthContextUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.checkerframework.checker.units.qual.A;
@@ -25,16 +26,28 @@ public class IndexController {
 
     @Autowired
     private ValidateCodeService validateCodeService;
-    
+
+    /*用户退出*/
+    @GetMapping(value = "/logout")
+    public Result logout(@RequestHeader(name = "token")String token){
+        sysUserService.logout(token);
+        return Result.build(null,ResultCodeEnum.SUCCESS);
+    }
 
     
     /*获取登录用户信息*/
-    @GetMapping(value = "/getUserInfo")
+    /*@GetMapping(value = "/getUserInfo")
     public Result getUserInfo(@RequestHeader(name = "token")String token){
         //通过token查询redis中的用户信息
         SysUser sysUser = sysUserService.getUserinfo(token);
         //返回用户信息
         return Result.build(sysUser,ResultCodeEnum.SUCCESS);
+    }*/
+    /*优化：从ThreadLocal中读取*/
+    @GetMapping(value = "/getUserInfo")
+    public Result getUserInfo(){
+        //返回用户信息
+        return Result.build(AuthContextUtil.get(),ResultCodeEnum.SUCCESS);
     }
 
     /*生成图片验证码*/

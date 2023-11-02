@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spzx-model" />
+        <module name="spzx-manager" />
         <module name="common-util" />
         <module name="common-service" />
-        <module name="spzx-manager" />
       </profile>
     </annotationProcessing>
   </component>
